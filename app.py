@@ -8,6 +8,8 @@ app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif']
 app.config['SECRET_KEY'] = 'supersecretkeygoeshere'
 
+with open("modelpath.txt") as f:
+    path = f.read().strip()
 
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
@@ -15,7 +17,7 @@ import numpy as np
 import PIL
 
 # Load the trained model
-model = load_model(r"C:\Users\deLL\Downloads\BasicCNNLSTMAug_layer-4+1l+1_aug-None_preprocess-None_img-256-3 (2)\BasicCNNLSTMAug_layer-4+1l+1_aug-None_preprocess-None_img-256-3.h5")
+model = load_model(path)
 
 # Define the target image size
 target_size = (256, 256)
