@@ -1,12 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
 from werkzeug.utils import secure_filename
 import os
-
+from handlers.routes import configure_routes
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = "uploads"
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif']
 app.config['SECRET_KEY'] = 'supersecretkeygoeshere'
+
+configure_routes(app)
 
 with open("modelpath.txt") as f:
     path = f.read().strip()
@@ -131,6 +133,7 @@ def results(file_urls=None):
 def detect():
     return render_template('desktop/detect.html')
 
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
 
 
