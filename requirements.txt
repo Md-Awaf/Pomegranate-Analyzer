@@ -1,5 +1,0 @@
-setuptools
-Flask==3.0.3
-numpy==1.23.5
-pillow==10.3.0
-tensorflow==2.12.0
