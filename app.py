@@ -131,6 +131,6 @@ def results(file_urls=None):
 def detect():
     return render_template('desktop/detect.html')
 
-
+app.run(debug=True)
 
 
