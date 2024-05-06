@@ -131,8 +131,6 @@ def results(file_urls=None):
 def detect():
     return render_template('desktop/detect.html')
 
-if __name__ == '__main__':
-    # app.run(host='192.168.175.193', debug=True)
-    app.run(debug=True)
+
 
 
