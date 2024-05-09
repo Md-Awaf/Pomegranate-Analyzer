@@ -34,6 +34,7 @@ jobs:
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
+          
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
@@ -61,7 +62,13 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      
+      - name: Download model file
+        run: |
+          wget -O model.rar https://drive.google.com/file/d/1SDCoCHSm2LkrBWe9PF0iaYqoWvfYRpkS/view?usp=drive_link
+          sudo apt-get update && sudo apt-get install -y unrar
+          unrar x model.rar
+          mv BasicCNNLSTMAug_layer-4+1l+1_aug-None_preprocess-None_img-256-3.h5 ./Model/
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
