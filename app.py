@@ -10,8 +10,7 @@ app.config['SECRET_KEY'] = 'supersecretkeygoeshere'
 
 path = r"Model\BasicCNNLSTMAug_layer-4+1l+1_aug-None_preprocess-None_img-256-3.h5"
     
-# Download and save the model
-download_model(model_url, save_path)
+
 
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
