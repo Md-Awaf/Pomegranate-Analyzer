@@ -8,8 +8,27 @@ app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif']
 app.config['SECRET_KEY'] = 'supersecretkeygoeshere'
 
+import requests
 
-path = "Model\BasicCNNLSTMAug_layer-4+1l+1_aug-None_preprocess-None_img-256-3.h5"
+def download_model(model_url, save_path):
+    # Ensure Model directory exists
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
+    
+    # Download model file
+    response = requests.get(model_url, stream=True)
+    with open(save_path, 'wb') as model_file:
+        for chunk in response.iter_content(chunk_size=1024):
+            if chunk:
+                model_file.write(chunk)
+
+# Google Drive link for the model
+model_url = r"https://drive.google.com/file/d/1SDCoCHSm2LkrBWe9PF0iaYqoWvfYRpkS/view?usp=drive_link"
+    
+# Path to save the model
+save_path = "Model/model.h5"
+    
+# Download and save the model
+download_model(model_url, save_path)
 
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
@@ -17,7 +36,7 @@ import numpy as np
 import PIL
 
 # Load the trained model
-model = load_model(path)
+model = load_model(save_path)
 
 # Define the target image size
 target_size = (256, 256)
